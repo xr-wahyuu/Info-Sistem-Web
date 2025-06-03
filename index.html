@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Browser, Perangkat & Jaringan Anda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .info-card {
+            background-color: white;
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease-in-out;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .info-card h2 {
+            font-size: 1.75rem; /* Larger section titles */
+            font-weight: 700;
+            color: #1e3a8a; /* Darker blue for titles */
+            border-bottom: 2px solid #3b82f6; /* Blue accent line */
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb; /* Lighter separator */
+            font-size: 0.95rem;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #374151; /* Dark gray for labels */
+            margin-right: 10px;
+        }
+        .info-value {
+            color: #1f2937; /* Slightly lighter gray for values */
+            text-align: right;
+            word-break: break-all;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #orientationButton {
+            background-color: #2563eb; /* Blue button */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            outline: none;
+        }
+        #orientationButton:hover {
+            background-color: #1d4ed8; /* Darker blue on hover */
+        }
+        #orientationButton:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 p-4 md:p-8">
+
+    <div class="container mx-auto max-w-4xl">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-blue-700">Informasi Lengkap Sistem Anda</h1>
+            <p class="text-lg text-slate-600 mt-2">Detail mengenai browser, perangkat, jaringan, dan lainnya.</p>
+        </header>
+
+        <!-- Informasi Browser -->
+        <section class="info-card" id="browser-info">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v1a1 1 0 01-.293.707L14 8.414V15.5a.5.5 0 01-.78.424l-4-3a.5.5 0 010-.848l4-3a.5.5 0 01.78.424V11.586l2.293-2.293A1 1 0 0117 10V4a1 1 0 00-1-1H4a1 1 0 00-1 1v6a1 1 0 01.293.707L6 13.414V6.5a.5.5 0 01.78-.424l4 3a.5.5 0 010 .848l-4 3a.5.5 0 01-.78-.424V8.414L3.707 5.707A1 1 0 013 5V3z" clip-rule="evenodd" /></svg>Informasi Browser</h2>
+            <div id="browser-details">
+                <!-- Data akan diisi oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Informasi Perangkat -->
+        <section class="info-card" id="device-info">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7 2a1 1 0 00-1 1v1H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>Informasi Perangkat</h2>
+            <div id="device-details">
+                <!-- Data akan diisi oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Informasi Jaringan -->
+        <section class="info-card" id="network-info">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 16a3.5 3.5 0 01-.369-6.98L7.89 6.23A5.002 5.002 0 0112.5 3a5.002 5.002 0 014.61 2.77L19.5 9.5a3.5 3.5 0 01-3.5 3.5h-2.93a3.488 3.488 0 01-.017.021A3.503 3.503 0 0112.5 16a3.5 3.5 0 01-3.5-3.5c0-.178.014-.353.04-.528L6.23 9.11A3.5 3.5 0 015.5 16zM12.5 5a3.001 3.001 0 00-2.83 2h5.66A3.001 3.001 0 0012.5 5zM16.5 11a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM5.5 11a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg>Informasi Jaringan (Sisi Klien)</h2>
+            <div id="network-details">
+                <!-- Data akan diisi oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Informasi Kondisi -->
+        <section class="info-card" id="condition-info">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" /></svg>Informasi Kondisi</h2>
+            <div id="condition-details">
+                <!-- Data akan diisi oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Informasi Sudut/Orientasi Perangkat -->
+        <section class="info-card" id="orientation-info">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" /></svg>Informasi Sudut (Orientasi Perangkat)</h2>
+            <button id="orientationButton" class="mb-4">Aktifkan Sensor Orientasi</button>
+            <p class="text-sm text-slate-500 mb-3">Membutuhkan izin dan dukungan sensor dari perangkat Anda. Gerakkan perangkat Anda setelah diaktifkan.</p>
+            <div id="orientation-details">
+                <!-- Data akan diisi oleh JavaScript -->
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; <span id="currentYear"></span> <a href="https://xr-wahyuu.github.io/" title="Ke Atas Halaman">Informasi Sistem Anda</a>. Dibuat dengan ❤️.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Helper function to add info item to a section
+        function addInfoItem(sectionElement, label, value) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'info-item';
+            
+            const labelSpan = document.createElement('span');
+            labelSpan.className = 'info-label';
+            labelSpan.textContent = label + ':';
+            
+            const valueSpan = document.createElement('span');
+            valueSpan.className = 'info-value';
+
+            // Assign unique IDs for elements that will be updated dynamically
+            let valueId = null;
+            if (label === 'Alamat IP Publik') valueId = 'value-ip-publik';
+            else if (label === 'Status Baterai') valueId = 'value-status-baterai';
+            else if (label === 'Preferensi Mode Gelap Sistem') valueId = 'value-mode-gelap';
+            else if (label === 'Alpha (Z axis)') valueId = 'value-alpha';
+            else if (label === 'Beta (X axis)') valueId = 'value-beta';
+            else if (label === 'Gamma (Y axis)') valueId = 'value-gamma';
+            else if (label === 'Absolute Orientation') valueId = 'value-absolute-orientation';
+
+            if (valueId) {
+                valueSpan.id = valueId;
+            }
+            
+            valueSpan.innerHTML = value !== undefined && value !== null && value !== '' ? value : '<span class="text-slate-400">Tidak Tersedia</span>';
+            
+            itemDiv.appendChild(labelSpan);
+            itemDiv.appendChild(valueSpan);
+            sectionElement.appendChild(itemDiv);
+        }
+
+        // Function to display loading indicator
+        function getLoadingIndicator() {
+            return '<div class="loader"></div>';
+        }
+
+        // 1. Informasi Browser
+        const browserDetails = document.getElementById('browser-details');
+        addInfoItem(browserDetails, 'User Agent', navigator.userAgent);
+        addInfoItem(browserDetails, 'Nama Kode Aplikasi', navigator.appCodeName);
+        addInfoItem(browserDetails, 'Nama Aplikasi', navigator.appName);
+        addInfoItem(browserDetails, 'Versi Aplikasi', navigator.appVersion);
+        addInfoItem(browserDetails, 'Platform', navigator.platform);
+        addInfoItem(browserDetails, 'Bahasa Browser', navigator.language || navigator.userLanguage);
+        addInfoItem(browserDetails, 'Cookies Diaktifkan', navigator.cookieEnabled ? 'Ya' : 'Tidak');
+        addInfoItem(browserDetails, 'Status Online', navigator.onLine ? 'Online' : 'Offline');
+        addInfoItem(browserDetails, 'Java Diaktifkan (legacy)', navigator.javaEnabled && navigator.javaEnabled() ? 'Ya' : 'Tidak');
+        
+        // 2. Informasi Perangkat
+        const deviceDetails = document.getElementById('device-details');
+        addInfoItem(deviceDetails, 'Lebar Layar', screen.width + 'px');
+        addInfoItem(deviceDetails, 'Tinggi Layar', screen.height + 'px');
+        addInfoItem(deviceDetails, 'Lebar Layar Tersedia', screen.availWidth + 'px');
+        addInfoItem(deviceDetails, 'Tinggi Layar Tersedia', screen.availHeight + 'px');
+        addInfoItem(deviceDetails, 'Kedalaman Warna', screen.colorDepth + ' bit');
+        addInfoItem(deviceDetails, 'Kedalaman Pixel', screen.pixelDepth + ' bit');
+        addInfoItem(deviceDetails, 'Orientasi Layar', screen.orientation ? screen.orientation.type : 'Tidak Diketahui');
+        addInfoItem(deviceDetails, 'Dukungan Sentuh', ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 'Ya' : 'Tidak');
+        addInfoItem(deviceDetails, 'Maksimum Titik Sentuh', navigator.maxTouchPoints !== undefined ? navigator.maxTouchPoints : 'N/A');
+        
+        // Hardware concurrency (CPU cores)
+        if (navigator.hardwareConcurrency) {
+            addInfoItem(deviceDetails, 'Jumlah Inti CPU (Logis)', navigator.hardwareConcurrency);
+        } else {
+            addInfoItem(deviceDetails, 'Jumlah Inti CPU (Logis)', 'Tidak Dapat Diakses');
+        }
+
+        // Device Memory
+        if (navigator.deviceMemory) {
+            addInfoItem(deviceDetails, 'Memori Perangkat (Estimasi GB)', navigator.deviceMemory);
+        } else {
+            addInfoItem(deviceDetails, 'Memori Perangkat (Estimasi GB)', 'Tidak Dapat Diakses');
+        }
+
+        // 3. Informasi Jaringan
+        const networkDetails = document.getElementById('network-details');
+        addInfoItem(networkDetails, 'URL Saat Ini', window.location.href);
+        addInfoItem(networkDetails, 'Hostname', window.location.hostname);
+        addInfoItem(networkDetails, 'Pathname', window.location.pathname);
+        addInfoItem(networkDetails, 'Protokol', window.location.protocol);
+        
+        // IP Address (using an external service)
+        addInfoItem(networkDetails, 'Alamat IP Publik', getLoadingIndicator());
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ipItem = document.getElementById('value-ip-publik');
+                if (ipItem) ipItem.textContent = data.ip;
+            })
+            .catch(error => {
+                console.error('Error fetching IP:', error);
+                const ipItem = document.getElementById('value-ip-publik');
+                if (ipItem) ipItem.innerHTML = '<span class="text-red-500">Gagal mengambil</span>';
+            });
+
+        // Network Connection API
+        if (navigator.connection) {
+            const conn = navigator.connection;
+            addInfoItem(networkDetails, 'Tipe Koneksi Efektif', conn.effectiveType);
+            addInfoItem(networkDetails, 'Kecepatan Download (Estimasi Mbps)', conn.downlink !== undefined ? conn.downlink : 'N/A');
+            addInfoItem(networkDetails, 'RTT (Estimasi ms)', conn.rtt !== undefined ? conn.rtt : 'N/A');
+            addInfoItem(networkDetails, 'Mode Hemat Data', conn.saveData ? 'Aktif' : 'Nonaktif');
+        } else {
+            addInfoItem(networkDetails, 'Info Koneksi Detail', 'API Tidak Didukung');
+        }
+
+        // 4. Informasi Kondisi
+        const conditionDetails = document.getElementById('condition-details');
+        // Battery Status API
+        if ('getBattery' in navigator) {
+            addInfoItem(conditionDetails, 'Status Baterai', getLoadingIndicator());
+            navigator.getBattery().then(battery => {
+                function updateBatteryStatus() {
+                    const batteryItem = document.getElementById('value-status-baterai');
+                    if(batteryItem) {
+                         batteryItem.innerHTML = `
+                            ${(battery.level * 100).toFixed(0)}% 
+                            (${battery.charging ? 'Sedang Mengisi Daya' : 'Tidak Mengisi Daya'})
+                            ${battery.chargingTime !== Infinity && battery.chargingTime !== 0 ? '<br>Waktu hingga penuh: ' + (battery.chargingTime/60).toFixed(0) + ' menit' : ''}
+                            ${battery.dischargingTime !== Infinity && battery.dischargingTime !== 0 ? '<br>Waktu hingga habis: ' + (battery.dischargingTime/60).toFixed(0) + ' menit' : ''}
+                        `;
+                    }
+                }
+                updateBatteryStatus();
+                battery.addEventListener('levelchange', updateBatteryStatus);
+                battery.addEventListener('chargingchange', updateBatteryStatus);
+                battery.addEventListener('chargingtimechange', updateBatteryStatus);
+                battery.addEventListener('dischargingtimechange', updateBatteryStatus);
+            }).catch(err => {
+                 const batteryItem = document.getElementById('value-status-baterai');
+                 if(batteryItem) batteryItem.innerHTML = '<span class="text-red-500">Tidak dapat diakses</span>';
+            });
+        } else {
+            addInfoItem(conditionDetails, 'Status Baterai', 'API Tidak Didukung');
+        }
+
+        // Dark Mode Preference
+        if (window.matchMedia) {
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            addInfoItem(conditionDetails, 'Preferensi Mode Gelap Sistem', prefersDarkScheme.matches ? 'Ya' : 'Tidak');
+            prefersDarkScheme.addEventListener('change', (e) => {
+                const darkModeItem = document.getElementById('value-mode-gelap');
+                if(darkModeItem) darkModeItem.textContent = e.matches ? 'Ya' : 'Tidak';
+            });
+        } else {
+            addInfoItem(conditionDetails, 'Preferensi Mode Gelap Sistem', 'Tidak Dapat Diakses');
+        }
+        
+        // Timezone
+        try {
+            addInfoItem(conditionDetails, 'Zona Waktu', Intl.DateTimeFormat().resolvedOptions().timeZone);
+        } catch (e) {
+            addInfoItem(conditionDetails, 'Zona Waktu', 'Tidak Dapat Diakses');
+        }
+
+
+        // 5. Informasi Sudut (Orientasi Perangkat)
+        const orientationDetails = document.getElementById('orientation-details');
+        const orientationButton = document.getElementById('orientationButton');
+
+        addInfoItem(orientationDetails, 'Dukungan DeviceOrientationEvent', ('DeviceOrientationEvent' in window) ? 'Ya' : 'Tidak');
+        addInfoItem(orientationDetails, 'Alpha (Z axis)', getLoadingIndicator());
+        addInfoItem(orientationDetails, 'Beta (X axis)', getLoadingIndicator());
+        addInfoItem(orientationDetails, 'Gamma (Y axis)', getLoadingIndicator());
+        addInfoItem(orientationDetails, 'Absolute Orientation', getLoadingIndicator());
+
+        function updateOrientationDisplay(alpha, beta, gamma, absolute) {
+            const alphaItem = document.getElementById('value-alpha');
+            const betaItem = document.getElementById('value-beta');
+            const gammaItem = document.getElementById('value-gamma');
+            const absoluteItem = document.getElementById('value-absolute-orientation');
+
+            if (alphaItem) alphaItem.textContent = alpha !== null ? alpha.toFixed(2) + '°' : 'N/A';
+            if (betaItem) betaItem.textContent = beta !== null ? beta.toFixed(2) + '°' : 'N/A';
+            if (gammaItem) gammaItem.textContent = gamma !== null ? gamma.toFixed(2) + '°' : 'N/A';
+            if (absoluteItem) absoluteItem.textContent = absolute !== null ? (absolute ? 'Ya' : 'Tidak') : 'N/A';
+        }
+        
+        // Initialize with N/A
+        updateOrientationDisplay(null, null, null, null);
+
+        let orientationListenerActive = false;
+
+        const handleOrientation = (event) => {
+            const alpha = event.alpha;
+            const beta = event.beta;
+            const gamma = event.gamma;
+            const absolute = event.absolute;
+            updateOrientationDisplay(alpha, beta, gamma, absolute);
+        };
+
+        orientationButton.addEventListener('click', () => {
+            if (!('DeviceOrientationEvent' in window)) {
+                // Menggunakan dialog kustom sebagai pengganti alert()
+                showCustomAlert('DeviceOrientationEvent tidak didukung oleh browser ini.');
+                orientationButton.disabled = true;
+                updateOrientationDisplay('Tidak Didukung', 'Tidak Didukung', 'Tidak Didukung', 'Tidak Didukung');
+                return;
+            }
+
+            // Check for iOS permission model
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                            orientationListenerActive = true;
+                            orientationButton.textContent = 'Sensor Aktif (Gerakkan Perangkat)';
+                            orientationButton.disabled = true;
+                        } else {
+                            showCustomAlert('Izin untuk mengakses orientasi perangkat ditolak.');
+                            updateOrientationDisplay('Izin Ditolak', 'Izin Ditolak', 'Izin Ditolak', 'Izin Ditolak');
+                            orientationButton.disabled = true;
+                        }
+                    })
+                    .catch(error => {
+                         console.error('Error requesting device orientation permission:', error);
+                         showCustomAlert('Gagal meminta izin orientasi perangkat: ' + error.message);
+                         updateOrientationDisplay('Error Izin', 'Error Izin', 'Error Izin', 'Error Izin');
+                         orientationButton.disabled = true;
+                    });
+            } else {
+                // For non-iOS 13+ browsers
+                window.addEventListener('deviceorientation', handleOrientation);
+                orientationListenerActive = true;
+                orientationButton.textContent = 'Sensor Aktif (Gerakkan Perangkat)';
+                orientationButton.disabled = true;
+            }
+        });
+        
+        // Update year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Fungsi untuk menampilkan alert kustom
+        function showCustomAlert(message) {
+            // Cek apakah sudah ada modal, jika belum buat
+            let modal = document.getElementById('customAlertModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'customAlertModal';
+                modal.style.position = 'fixed';
+                modal.style.left = '0';
+                modal.style.top = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+
+                const modalContent = document.createElement('div');
+                modalContent.style.backgroundColor = 'white';
+                modalContent.style.padding = '20px';
+                modalContent.style.borderRadius = '8px';
+                modalContent.style.textAlign = 'center';
+                modalContent.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+
+                const messageP = document.createElement('p');
+                messageP.id = 'customAlertMessage';
+                messageP.style.marginBottom = '15px';
+                messageP.style.fontSize = '1rem';
+
+                const closeButton = document.createElement('button');
+                closeButton.textContent = 'OK';
+                closeButton.style.padding = '8px 16px';
+                closeButton.style.backgroundColor = '#2563eb';
+                closeButton.style.color = 'white';
+                closeButton.style.border = 'none';
+                closeButton.style.borderRadius = '4px';
+                closeButton.style.cursor = 'pointer';
+                closeButton.onclick = function() {
+                    modal.style.display = 'none';
+                };
+
+                modalContent.appendChild(messageP);
+                modalContent.appendChild(closeButton);
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+            }
+
+            // Tampilkan modal dan set pesannya
+            document.getElementById('customAlertMessage').textContent = message;
+            modal.style.display = 'flex';
+        }
+
+        // Hapus polyfill :contains yang tidak standar dan menyebabkan error
+        // (Bagian IIFE yang mencoba memodifikasi querySelectorAll dan querySelector dihapus)
+
+    </script>
+</body>
+</html>
