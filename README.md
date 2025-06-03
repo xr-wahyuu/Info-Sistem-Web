@@ -3,7 +3,6 @@
 Website sederhana untuk menampilkan informasi lengkap mengenai browser, perangkat keras, jaringan, kondisi, dan sensor (seperti orientasi perangkat) dari sisi klien secara *real-time*. Dibangun dengan HTML, Tailwind CSS, dan JavaScript murni.
 
 ![Pratinjau Aplikasi (Ganti dengan screenshot aplikasi Anda jika ada)](https://i.imgur.com/yMtnjve.png)
-*(Saran: Ambil screenshot halaman web Anda dan unggah ke repositori atau layanan hosting gambar, lalu ganti URL_SCREENSHOT_ANDA_DI_SINI dengan URL gambar tersebut)*
 
 ## ✨ Fitur Utama
 
